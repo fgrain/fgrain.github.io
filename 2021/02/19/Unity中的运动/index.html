@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Unity中的运动（一）——滑动小球 | fg的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.控制位置1.1设置场景​    创建一个平面和一个球体，将摄像机放到平面上方，使用正交视角，关闭球体的投射阴影  分别为球体和平面创建材质，并为球体的移动轨迹创建材质，同时为球体创建一个移动脚本  将MovingSphere和Trail Renderer组件挂到球体上，Trail Renderer可以标记出物体运动的轨迹  将轨迹材质附加到Trail Renderer组件的材质上面，设置轨迹">
+  <meta name="description" content="1.控制位置1.1设置场景​    创建一个平面和一个球体，将摄像机放到平面上方，使用正交视角，关闭球体的投射阴影  分别为球体和平面创建材质，并为球体的移动轨迹创建材质，同时为球体创建一个移动脚本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity中的运动（一）——滑动小球">
 <meta property="og:url" content="http://example.com/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/index.html">
 <meta property="og:site_name" content="fg的博客">
-<meta property="og:description" content="1.控制位置1.1设置场景​    创建一个平面和一个球体，将摄像机放到平面上方，使用正交视角，关闭球体的投射阴影  分别为球体和平面创建材质，并为球体的移动轨迹创建材质，同时为球体创建一个移动脚本  将MovingSphere和Trail Renderer组件挂到球体上，Trail Renderer可以标记出物体运动的轨迹  将轨迹材质附加到Trail Renderer组件的材质上面，设置轨迹">
+<meta property="og:description" content="1.控制位置1.1设置场景​    创建一个平面和一个球体，将摄像机放到平面上方，使用正交视角，关闭球体的投射阴影  分别为球体和平面创建材质，并为球体的移动轨迹创建材质，同时为球体创建一个移动脚本">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219155957137.png">
 <meta property="og:image" content="http://example.com/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219160153824.png">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://example.com/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219222322265.png">
 <meta property="og:image" content="http://example.com/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219231746961.png">
 <meta property="article:published_time" content="2021-02-19T06:35:48.000Z">
-<meta property="article:modified_time" content="2021-02-19T15:43:00.595Z">
+<meta property="article:modified_time" content="2021-02-19T15:49:27.392Z">
 <meta property="article:author" content="fgrain">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
@@ -179,6 +179,8 @@
 <h2 id="1-控制位置"><a href="#1-控制位置" class="headerlink" title="1.控制位置"></a>1.控制位置</h2><h3 id="1-1设置场景"><a href="#1-1设置场景" class="headerlink" title="1.1设置场景"></a>1.1设置场景</h3><p>​    创建一个平面和一个球体，将摄像机放到平面上方，使用正交视角，关闭球体的投射阴影</p>
 <p><img src="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219155957137.png" alt="image-20210219155957137"></p>
 <p>分别为球体和平面创建材质，并为球体的移动轨迹创建材质，同时为球体创建一个移动脚本</p>
+<a id="more"></a>
+
 <p><img src="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219160153824.png" alt="image-20210219160153824"></p>
 <p>将MovingSphere和Trail Renderer组件挂到球体上，Trail Renderer可以标记出物体运动的轨迹</p>
 <p><img src="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/image-20210219160350231.png" alt="image-20210219160350231"></p>
