@@ -6,26 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Unity中的运动（二）——物理 | fg的博客</title>
+  <title>剑指36-41 | fg的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文内容  控制刚体小球的速度 通过跳跃支持垂直运动 检查地面及其角度 使用ProBuilder创建测试场景 沿着斜坡移动">
+  <meta name="description" content="36 两个链表的第一个公共节点题目描述 输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unity中的运动（二）——物理">
-<meta property="og:url" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/index.html">
+<meta property="og:title" content="剑指36-41">
+<meta property="og:url" content="http://example.com/2021/03/06/%E5%89%91%E6%8C%8736-41/index.html">
 <meta property="og:site_name" content="fg的博客">
-<meta property="og:description" content="本文内容  控制刚体小球的速度 通过跳跃支持垂直运动 检查地面及其角度 使用ProBuilder创建测试场景 沿着斜坡移动">
+<meta property="og:description" content="36 两个链表的第一个公共节点题目描述 输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png">
-<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305214133898.png">
-<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143701902.png">
-<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143732725.png">
-<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306145009927.png">
-<meta property="article:published_time" content="2021-03-05T12:32:14.000Z">
-<meta property="article:modified_time" content="2021-03-06T07:35:31.704Z">
+<meta property="article:published_time" content="2021-03-06T13:13:08.000Z">
+<meta property="article:modified_time" content="2021-03-06T13:41:13.615Z">
 <meta property="article:author" content="fgrain">
-<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="剑指offer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png">
   
     <link rel="alternative" href="/atom.xml" title="fg的博客" type="application/atom+xml">
   
@@ -162,69 +157,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unity中的运动（二）——物理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-剑指36-41" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Unity中的运动（二）——物理
+      剑指36-41
     </h1>
   
 
         
-        <a href="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-03-05T12:32:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-05</time>
+        <a href="/2021/03/06/%E5%89%91%E6%8C%8736-41/" class="archive-article-date">
+  	<time datetime="2021-03-06T13:13:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>本文内容</strong></p>
-<ul>
-<li>控制刚体小球的速度</li>
-<li>通过跳跃支持垂直运动</li>
-<li>检查地面及其角度</li>
-<li>使用ProBuilder创建测试场景</li>
-<li>沿着斜坡移动</li>
-</ul>
+        <h3 id="36-两个链表的第一个公共节点"><a href="#36-两个链表的第一个公共节点" class="headerlink" title="36 两个链表的第一个公共节点"></a>36 两个链表的第一个公共节点</h3><p><strong>题目描述</strong></p>
+<p>输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）</p>
 <a id="more"></a>
 
-<h2 id="1-刚体"><a href="#1-刚体" class="headerlink" title="1.刚体"></a>1.刚体</h2><p>为了使球体在复杂的3D环境中移动，我们必须支持与任意几何图形的交互。我们将使用Unity现有的物理引擎，而不是自己实现。</p>
-<p>与物理引擎结合可以使用两种通用方法来控制角色。首先是刚体方法，即通过施加力或改变其速度，使角色的行为像常规物理对象一样，而间接控制它。第二种是运动学方法，即在仅查询物理引擎以执行自定义碰撞检测的同时进行直接控制。</p>
-<h3 id="1-1刚体组件"><a href="#1-1刚体组件" class="headerlink" title="1.1刚体组件"></a>1.1刚体组件</h3><p>用第一种方式控制球体首先要向其添加一个刚体组件。可以使用刚体的默认配置。</p>
-<p>添加刚体之后在代码中去掉位置约束，移动小球，小球可以经过平面边缘，但会掉下去</p>
-<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png" alt="image-20210305211826449"></p>
-<p>为防止小球掉下去我们可以围绕着平面造一堵墙，当小球视图移动到一个角落时，由于物理引擎和代码为定位球产生冲突，球会变得抖动。我们将其移入墙壁，PhysX会将其后推来解决碰撞，如果停止推动PhysX将使球体因为动量保持运动。</p>
-<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305214133898.png" alt="image-20210305214133898"></p>
-<h3 id="1-2控制刚体速率"><a href="#1-2控制刚体速率" class="headerlink" title="1.2控制刚体速率"></a>1.2控制刚体速率</h3><p>直接调整球的位置可以有效的使球移动，但有些情况我们需要对球施加力或调整球的速度来间接控制球。</p>
-<p>我们需要访问球体的刚体组件， 可以在Awake中初始化字段。然后给刚体设置速度</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Rigidbody body;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       body = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>小球碰撞到墙时会影响速度，所以我们要先获取小球的速度，再对小球的速度进行调整</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">velocity = body.velocity;</span><br><span class="line"></span><br><span class="line">     Vector3 desiredSpeed = <span class="keyword">new</span> Vector3(playerInput.x, <span class="number">0</span>, playerInput.y) * maxSpeed;</span><br><span class="line">     <span class="built_in">float</span> maxSpeedChange = maxAcceleration * Time.deltaTime;</span><br><span class="line"></span><br><span class="line">     velocity.x = Mathf.MoveTowards(velocity.x, desiredSpeed.x, maxSpeedChange);</span><br><span class="line">     velocity.z = Mathf.MoveTowards(velocity.z, desiredSpeed.z, maxSpeedChange);</span><br><span class="line"></span><br><span class="line">     body.velocity = velocity;</span><br></pre></td></tr></table></figure>
-<h3 id="1-3无摩擦运动"><a href="#1-3无摩擦运动" class="headerlink" title="1.3无摩擦运动"></a>1.3无摩擦运动</h3><p>通过调整球体的速度，我们让小球看上去像之前仅调整位移的运动，但速度慢了许多，这是因为PhysX会产生摩擦，虽然这更真实，但会使配置球体变得困难。我们可以创建一个新的物理材质取消摩擦和反弹，把所有值设为0，并将“combine”设为Minimum。</p>
-<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143701902.png" alt="image-20210306143701902"></p>
-<p>然后把材质分配给球体的碰撞器（collider）</p>
-<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143732725.png" alt="image-20210306143732725"></p>
-<p>现在小球不受摩擦和碰撞，运动丝滑了许多。</p>
-<p>但球体在碰撞的时候仍会反弹一点，这是因为PhysX不会防止碰撞，而是会在碰撞发生后检测它们，然后移动刚体以使它们不再相交。如果运动特别块墙体有很薄，会发生小球穿墙而过的情况。可以通过更改“Rigidbody”的“Collision Detcetion”模式来防止这种情况，仅在运动非常快的时候这样设置。</p>
-<p>若我们想让小球滑动而不是滚动，通过“Rigidbody”组件的“Constraints ”冻结旋转来实现</p>
-<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306145009927.png" alt="image-20210306145009927"></p>
-<h3 id="1-4-Fixed-Update"><a href="#1-4-Fixed-Update" class="headerlink" title="1.4 Fixed Update"></a>1.4 Fixed Update</h3><p>物理引擎使用固定的时间步长，而不管帧速率如何。Upadta为每一帧调用但每一帧的时间不固定，而FixedUpdate则不受帧率影响，它使以固定时间间隔（0.02s）被调用。所以一些物理熟悉的更新操作应放在FixedUpdate中进行操作，这样物体的物理表现更加平滑。</p>
-<p>我们将检查输入并设置速度的部分放在Update中，调整速度的部分放在FixedUpdate中。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       playerInput.x = Input.GetAxis(<span class="string">&quot;Horizontal&quot;</span>);</span><br><span class="line">       playerInput.y = Input.GetAxis(<span class="string">&quot;Vertical&quot;</span>);</span><br><span class="line">       playerInput = Vector2.ClampMagnitude(playerInput, <span class="number">1f</span>);</span><br><span class="line">       desiredSpeed = <span class="keyword">new</span> Vector3(playerInput.x, <span class="number">0</span>, playerInput.y) * maxSpeed;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixedUpdate</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       velocity = body.velocity;     </span><br><span class="line">       <span class="built_in">float</span> maxSpeedChange = maxAcceleration * Time.deltaTime;</span><br><span class="line">       velocity.x = Mathf.MoveTowards(velocity.x, desiredSpeed.x, maxSpeedChange);</span><br><span class="line">       velocity.z = Mathf.MoveTowards(velocity.z, desiredSpeed.z, maxSpeedChange);</span><br><span class="line">       body.velocity = velocity;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>根据你的帧速率，FixedUpdate每次调用时候，Update可以被调用零次，一次或多次。每个帧都会发生一系列FixedUpdate调用，然后调用Update，然后渲染该帧。当物理时间步长相对于帧时间太大时，这会使物理仿真的离散性质变得明显。可以通过减少固定时间步长或启用刚体的插值模式来解决此问题。</p>
-<p><em>Interpolate</em> 插值，如果发现刚体移动有卡顿，可以尝试选择此选项。 </p>
-<ul>
-<li><em>None</em> 不使用插值</li>
-<li><em>Interpolate</em> 根据上一帧的Transform进行平滑</li>
-<li><em>Extrapolate</em> 根据估算的下一帧的Transform进行平滑</li>
-</ul>
-</blockquote>
-<h2 id="2-跳跃"><a href="#2-跳跃" class="headerlink" title="2.跳跃"></a>2.跳跃</h2><h3 id="2-1跳跃指令"><a href="#2-1跳跃指令" class="headerlink" title="2.1跳跃指令"></a>2.1跳跃指令</h3>
+<p><strong>思路：</strong></p>
+<p>先求出两个链表的长度，让较长的链表先走两链表长度差的距离，然后两个链表同时走，直到遇到公共节点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">FindFirstCommonNode</span><span class="params">( ListNode* pHead1, ListNode* pHead2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!pHead1||!pHead2)<span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> len1=<span class="number">0</span>,len2=<span class="number">0</span>;</span><br><span class="line">        ListNode* h1=pHead1,*h2=pHead2;</span><br><span class="line">        <span class="keyword">while</span>(h1-&gt;next||h2-&gt;next)&#123;</span><br><span class="line">            <span class="keyword">if</span>(h1-&gt;next)&#123;</span><br><span class="line">                h1=h1-&gt;next;</span><br><span class="line">                len1++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(h2-&gt;next)&#123;</span><br><span class="line">                h2=h2-&gt;next;</span><br><span class="line">                len2++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        h1=len1&gt;len2?pHead1:pHead2;</span><br><span class="line">        h2=len1&lt;=len2?pHead1:pHead2;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="built_in">abs</span>(len1-len2);</span><br><span class="line">        <span class="keyword">while</span>(i&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            h1=h1-&gt;next;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(h1!=h2)&#123;</span><br><span class="line">            h1=h1-&gt;next;</span><br><span class="line">            h2=h2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> h1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="37-数字在升序数组中出现的次数"><a href="#37-数字在升序数组中出现的次数" class="headerlink" title="37 数字在升序数组中出现的次数"></a>37 数字在升序数组中出现的次数</h3><p><strong>题目描述</strong></p>
+<p>统计一个数字在升序数组中出现的次数。</p>
+<p><strong>思路：</strong></p>
+<p>找到一个数在数组中的位置，一般用二分查找。</p>
+<p>由于data中都是整数，我们可以搜索k-0.5和k+0.5，这两个数的插入位置做差刚好就是k出现的次数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetNumberOfK</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; data ,<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> search(data,<span class="number">0</span>,data.size()<span class="number">-1</span>,k+<span class="number">0.5</span>)-search(data,<span class="number">0</span>,data.size()<span class="number">-1</span>,k<span class="number">-0.5</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;data,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">double</span> k)</span></span>&#123;   </span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line">        <span class="keyword">while</span>(l&lt;=r)&#123;</span><br><span class="line">            mid=l+(r-l)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(data[mid]&lt;k)&#123;</span><br><span class="line">                l=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(data[mid]&gt;k)&#123;</span><br><span class="line">                r=mid<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="38-二叉树的深度"><a href="#38-二叉树的深度" class="headerlink" title="38 二叉树的深度"></a>38 二叉树的深度</h3><p><strong>题目描述</strong></p>
+<p>输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<p><strong>示例1</strong></p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;1,2,3,4,5,#,6,#,#,7&#125;</span><br></pre></td></tr></table></figure>
+<p>返回值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+<p><strong>思路：</strong></p>
+<p>深度搜索二叉树，每一层都记录层数，返回层数最大值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">TreeDepth</span><span class="params">(TreeNode* pRoot)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!pRoot)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> dep=<span class="number">0</span>;</span><br><span class="line">        dfs(<span class="number">1</span>,dep,pRoot);</span><br><span class="line">        <span class="keyword">return</span> dep;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur,<span class="keyword">int</span> &amp;dep,TreeNode* pRoot)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pRoot-&gt;left)dfs(cur+<span class="number">1</span>,dep,pRoot-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(pRoot-&gt;right)dfs(cur+<span class="number">1</span>,dep,pRoot-&gt;right);</span><br><span class="line">        dep=max(dep,cur);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="39-平衡二叉树"><a href="#39-平衡二叉树" class="headerlink" title="39 平衡二叉树"></a>39 平衡二叉树</h3><p><strong>题目描述</strong></p>
+<p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
+<p>在这里，我们只需要考虑其平衡性，不需要考虑其是不是排序二叉树</p>
+<p><strong>平衡二叉树</strong>（Balanced Binary Tree），具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</p>
+<p><strong>示例1</strong></p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;1,2,3,4,5,6,7&#125;</span><br></pre></td></tr></table></figure>
+<p>返回值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
+<p><strong>思路：</strong></p>
+<p>深度搜索二叉树，记录每个子树的高度，设置一个标志b，若左右子树的高度差大于一，b=false停止遍历</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">IsBalanced_Solution</span><span class="params">(TreeNode* pRoot)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!pRoot)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">bool</span> res=<span class="literal">true</span>;</span><br><span class="line">        dfs(res,pRoot);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">bool</span> &amp;b,TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!b)<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> left=dfs(b,root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(!b)<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> right=dfs(b,root-&gt;right);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(left-right)&gt;<span class="number">1</span>)b=<span class="literal">false</span>;        </span><br><span class="line">        <span class="keyword">return</span> max(left,right)+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="40-数组中只出现一次的数字"><a href="#40-数组中只出现一次的数字" class="headerlink" title="40 数组中只出现一次的数字"></a>40 数组中只出现一次的数字</h3><p><strong>题目描述</strong></p>
+<p>一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。</p>
+<p><strong>示例1</strong></p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1,4,1,6]</span><br></pre></td></tr></table></figure>
+<p>返回值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[4,6]</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回的结果中较小的数排在前面 </span><br></pre></td></tr></table></figure>
+<p><strong>思路：</strong></p>
+<p>利用unordered_map统计每一个数出现的次数，最好返回只出现一次的数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">FindNumsAppearOnce</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">array</span>)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; <span class="built_in">map</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i:<span class="built_in">array</span>)&#123;</span><br><span class="line">            <span class="built_in">map</span>[i]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> m:<span class="built_in">map</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(m.second==<span class="number">1</span>)&#123;</span><br><span class="line">                res.push_back(m.first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(res[<span class="number">0</span>]&gt;res[<span class="number">1</span>])swap(res[<span class="number">0</span>],res[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="41-和为S的连续正数序列"><a href="#41-和为S的连续正数序列" class="headerlink" title="41 和为S的连续正数序列"></a>41 和为S的连续正数序列</h3><p><strong>题目描述</strong></p>
+<p>小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck!</p>
+<p><strong>返回值描述：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输出所有和为S的连续正数序列。序列内按照从小至大的顺序，序列间按照开始数字从小到大的顺序</span><br></pre></td></tr></table></figure>
+<p><strong>示例1</strong></p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
+<p>返回值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[2,3,4],[4,5]]</span><br></pre></td></tr></table></figure>
+<p><strong>思路：</strong></p>
+<p>利用双指针或者说滑动窗口，根据窗口内数的和确定窗口的位置和宽度。</p>
+<p>若和等于sum，将窗口内的数添加到结果中，若小于sum右指针右移，若大于sum，左指针右移</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; FindContinuousSequence(<span class="keyword">int</span> sum) &#123;</span><br><span class="line">        <span class="keyword">int</span> l=<span class="number">1</span>,r=<span class="number">2</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">            <span class="keyword">int</span> num=(l+r)*(r-l+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(num==sum)&#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=l;i&lt;=r;i++)&#123;</span><br><span class="line">                    p.push_back(i);</span><br><span class="line">                &#125;</span><br><span class="line">                res.push_back(p);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(num&lt;sum)r++;</span><br><span class="line">            <span class="keyword">else</span> l++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -237,7 +250,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
         		</li>
       		
 		</ul>
@@ -293,7 +310,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/06/%E5%89%91%E6%8C%8736-41/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -307,18 +324,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/06/%E5%89%91%E6%8C%8736-41/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指36-41
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/03/05/%E5%89%91%E6%8C%8731-35/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指31-35</div>
+    <a href="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Unity中的运动（二）——物理</div>
       <i class="icon-circle-right"></i>
     </a>
   
