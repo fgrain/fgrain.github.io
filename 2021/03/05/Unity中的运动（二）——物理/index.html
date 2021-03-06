@@ -17,8 +17,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png">
 <meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305214133898.png">
+<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143701902.png">
+<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143732725.png">
+<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306145009927.png">
 <meta property="article:published_time" content="2021-03-05T12:32:14.000Z">
-<meta property="article:modified_time" content="2021-03-05T13:42:10.782Z">
+<meta property="article:modified_time" content="2021-03-06T06:56:49.614Z">
 <meta property="article:author" content="fgrain">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
@@ -180,7 +183,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>本文内容</strong></p>
-<ol>
+<ul>
 <li><p>控制刚体小球的速度</p>
 </li>
 <li><p>通过跳跃支持垂直运动</p>
@@ -191,7 +194,7 @@
 </li>
 <li><p>沿着斜坡移动</p>
 </li>
-</ol>
+</ul>
 <a id="more"></a>
 
 <h2 id="1-刚体"><a href="#1-刚体" class="headerlink" title="1.刚体"></a>1.刚体</h2><p>为了使球体在复杂的3D环境中移动，我们必须支持与任意几何图形的交互。我们将使用Unity现有的物理引擎，而不是自己实现。</p>
@@ -201,7 +204,20 @@
 <p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png" alt="image-20210305211826449"></p>
 <p>为防止小球掉下去我们可以围绕着平面造一堵墙，当小球视图移动到一个角落时，由于物理引擎和代码为定位球产生冲突，球会变得抖动。我们将其移入墙壁，PhysX会将其后推来解决碰撞，如果停止推动PhysX将使球体因为动量保持运动。</p>
 <p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305214133898.png" alt="image-20210305214133898"></p>
-<h3 id="1-2控制刚体速率"><a href="#1-2控制刚体速率" class="headerlink" title="1.2控制刚体速率"></a>1.2控制刚体速率</h3>
+<h3 id="1-2控制刚体速率"><a href="#1-2控制刚体速率" class="headerlink" title="1.2控制刚体速率"></a>1.2控制刚体速率</h3><p>直接调整球的位置可以有效的使球移动，但有些情况我们需要对球施加力或调整球的速度来间接控制球。</p>
+<p>我们需要访问球体的刚体组件， 可以在Awake中初始化字段。然后给刚体设置速度</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Rigidbody body;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       body = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>小球碰撞到墙时会影响速度，所以我们要先获取小球的速度，再对小球的速度进行调整</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">velocity = body.velocity;</span><br><span class="line"></span><br><span class="line">     Vector3 desiredSpeed = <span class="keyword">new</span> Vector3(playerInput.x, <span class="number">0</span>, playerInput.y) * maxSpeed;</span><br><span class="line">     <span class="built_in">float</span> maxSpeedChange = maxAcceleration * Time.deltaTime;</span><br><span class="line"></span><br><span class="line">     velocity.x = Mathf.MoveTowards(velocity.x, desiredSpeed.x, maxSpeedChange);</span><br><span class="line">     velocity.z = Mathf.MoveTowards(velocity.z, desiredSpeed.z, maxSpeedChange);</span><br><span class="line"></span><br><span class="line">     body.velocity = velocity;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3无摩擦运动"><a href="#1-3无摩擦运动" class="headerlink" title="1.3无摩擦运动"></a>1.3无摩擦运动</h3><p>通过调整球体的速度，我们让小球看上去像之前仅调整位移的运动，但速度慢了许多，这是因为PhysX会产生摩擦，虽然这更真实，但会使配置球体变得困难。我们可以创建一个新的物理材质取消摩擦和反弹，把所有值设为0，并将“combine”设为Minimum。</p>
+<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143701902.png" alt="image-20210306143701902"></p>
+<p>然后把材质分配给球体的碰撞器（collider）</p>
+<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143732725.png" alt="image-20210306143732725"></p>
+<p>现在小球不受摩擦和碰撞，运动丝滑了许多。</p>
+<p>但球体在碰撞的时候仍会反弹一点，这是因为PhysX不会防止碰撞，而是会在碰撞发生后检测它们，然后移动刚体以使它们不再相交。如果运动特别块墙体有很薄，会发生小球穿墙而过的情况。可以通过更改“Rigidbody”的“Collision Detcetion”模式来防止这种情况，仅在运动非常快的时候这样设置。</p>
+<p>若我们想让小球滑动而不是滚动，通过“Rigidbody”组件的“Constraints ”冻结旋转来实现</p>
+<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306145009927.png" alt="image-20210306145009927"></p>
+<h3 id="1-4-Fixed-Update"><a href="#1-4-Fixed-Update" class="headerlink" title="1.4 Fixed Update"></a>1.4 Fixed Update</h3>
       
 
       
