@@ -8,18 +8,21 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Unity中的运动（二）——物理 | fg的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="游戏爱好者，目标是独立游戏开发人">
+  <meta name="description" content="本文内容  控制刚体小球的速度  通过跳跃支持垂直运动  检查地面及其角度  使用ProBuilder创建测试场景  沿着斜坡移动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity中的运动（二）——物理">
 <meta property="og:url" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/index.html">
 <meta property="og:site_name" content="fg的博客">
-<meta property="og:description" content="游戏爱好者，目标是独立游戏开发人">
+<meta property="og:description" content="本文内容  控制刚体小球的速度  通过跳跃支持垂直运动  检查地面及其角度  使用ProBuilder创建测试场景  沿着斜坡移动">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png">
+<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305214133898.png">
 <meta property="article:published_time" content="2021-03-05T12:32:14.000Z">
-<meta property="article:modified_time" content="2021-03-05T12:33:17.797Z">
+<meta property="article:modified_time" content="2021-03-05T13:42:10.782Z">
 <meta property="article:author" content="fgrain">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png">
   
     <link rel="alternative" href="/atom.xml" title="fg的博客" type="application/atom+xml">
   
@@ -176,7 +179,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><strong>本文内容</strong></p>
+<ol>
+<li><p>控制刚体小球的速度</p>
+</li>
+<li><p>通过跳跃支持垂直运动</p>
+</li>
+<li><p>检查地面及其角度</p>
+</li>
+<li><p>使用ProBuilder创建测试场景</p>
+</li>
+<li><p>沿着斜坡移动</p>
+</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="1-刚体"><a href="#1-刚体" class="headerlink" title="1.刚体"></a>1.刚体</h2><p>为了使球体在复杂的3D环境中移动，我们必须支持与任意几何图形的交互。我们将使用Unity现有的物理引擎，而不是自己实现。</p>
+<p>与物理引擎结合可以使用两种通用方法来控制角色。首先是刚体方法，即通过施加力或改变其速度，使角色的行为像常规物理对象一样，而间接控制它。第二种是运动学方法，即在仅查询物理引擎以执行自定义碰撞检测的同时进行直接控制。</p>
+<h3 id="1-1刚体组件"><a href="#1-1刚体组件" class="headerlink" title="1.1刚体组件"></a>1.1刚体组件</h3><p>用第一种方式控制球体首先要向其添加一个刚体组件。可以使用刚体的默认配置。</p>
+<p>添加刚体之后在代码中去掉位置约束，移动小球，小球可以经过平面边缘，但会掉下去</p>
+<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305211826449.png" alt="image-20210305211826449"></p>
+<p>为防止小球掉下去我们可以围绕着平面造一堵墙，当小球视图移动到一个角落时，由于物理引擎和代码为定位球产生冲突，球会变得抖动。我们将其移入墙壁，PhysX会将其后推来解决碰撞，如果停止推动PhysX将使球体因为动量保持运动。</p>
+<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210305214133898.png" alt="image-20210305214133898"></p>
+<h3 id="1-2控制刚体速率"><a href="#1-2控制刚体速率" class="headerlink" title="1.2控制刚体速率"></a>1.2控制刚体速率</h3>
       
 
       
@@ -387,14 +412,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
@@ -404,6 +421,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
             
             <div class="clearfix"></div>
