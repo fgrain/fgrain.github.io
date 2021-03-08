@@ -20,8 +20,9 @@
 <meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143701902.png">
 <meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306143732725.png">
 <meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210306145009927.png">
+<meta property="og:image" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210307211148536.png">
 <meta property="article:published_time" content="2021-03-05T12:32:14.000Z">
-<meta property="article:modified_time" content="2021-03-06T07:35:31.704Z">
+<meta property="article:modified_time" content="2021-03-08T03:26:09.470Z">
 <meta property="article:author" content="fgrain">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
@@ -224,7 +225,19 @@
 <li><em>Extrapolate</em> 根据估算的下一帧的Transform进行平滑</li>
 </ul>
 </blockquote>
-<h2 id="2-跳跃"><a href="#2-跳跃" class="headerlink" title="2.跳跃"></a>2.跳跃</h2><h3 id="2-1跳跃指令"><a href="#2-1跳跃指令" class="headerlink" title="2.1跳跃指令"></a>2.1跳跃指令</h3>
+<h2 id="2-跳跃"><a href="#2-跳跃" class="headerlink" title="2.跳跃"></a>2.跳跃</h2><h3 id="2-1跳跃指令"><a href="#2-1跳跃指令" class="headerlink" title="2.1跳跃指令"></a>2.1跳跃指令</h3><p>使用Input.GetButtonDown(“Jump”)来检测玩家是否在该帧按下跳跃按钮。默认空格为跳跃键，可以在Editor-&gt;ProjectSetting-&gt;InputManager中更改按键。我们在Update中执行这个操作，用desiredJump字段跟踪是否需要跳跃，在FixedUpdate中执行跳跃操作。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="built_in">bool</span> desiredJump;</span><br><span class="line">......</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       ......</span><br><span class="line">       desiredJump = Input.GetButtonDown(<span class="string">&quot;Jump&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但我们可能不在下一帧调用FixedUpdate，这种情况下desiredJump被设为false，跳转指令将被遗忘。我们可以通过或运算防止这种情况，直到我们显示的将其设置回false</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desiredJump |= Input.GetButtonDown(<span class="string">&quot;Jump&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>在调整速度后并且在fixedUpdate调用之前检测是否跳跃，若有跳跃请求，调用Jump方法，该方法初始化为在速度y的分量上加5，模拟突然向上的加速度。</p>
+<p><img src="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/image-20210307211148536.png" alt="image-20210307211148536"></p>
+<h3 id="2-2跳跃高度"><a href="#2-2跳跃高度" class="headerlink" title="2.2跳跃高度"></a>2.2跳跃高度</h3><p>我们将跳跃的高度设为可配置的。可以通过直接控制跳跃速度来实现这一点，但这并不直观。直接控制跳跃高度更方便。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">SerializeField, Range(0f, 10f)</span>] <span class="built_in">float</span> jumpHeight = <span class="number">2f</span>; </span><br></pre></td></tr></table></figure>
+<p>跳跃需克服重力，具体来说<br>$$<br>v_y=\sqrt{-2gh}<br>$$</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">velocity.y = Mathf.Sqrt(<span class="number">-2f</span> * Physics.gravity.y * jumpHeight);</span><br></pre></td></tr></table></figure>
+<p>由于物理模拟是离散性的，我们很可能无法达到所需的高度。在时间步长之间的某个中间值时达到最大值。</p>
+<h3 id="2-3-在地面上跳跃"><a href="#2-3-在地面上跳跃" class="headerlink" title="2.3 在地面上跳跃"></a>2.3 在地面上跳跃</h3><p>现在球可以在空中起跳</p>
+
       
 
       
