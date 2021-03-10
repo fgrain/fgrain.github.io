@@ -155,6 +155,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-五子棋AI" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/10/%E4%BA%94%E5%AD%90%E6%A3%8BAI/">五子棋AI</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/10/%E4%BA%94%E5%AD%90%E6%A3%8BAI/" class="archive-article-date">
+  	<time datetime="2021-03-10T08:10:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>需要用到的知识</strong><br>博弈树<br>极大极小值搜索算法<br>评估函数<br>Alpha-Beta剪枝算法 </p>
+<h3 id="博弈树"><a href="#博弈树" class="headerlink" title="博弈树"></a>博弈树</h3><p>博弈树是指由于动态博弈参与者的行动有先后次序，因此可以依次将参与者的行动展开成一个树状图形，顾名思义，博弈树就对博弈双方以相同的次数轮流进行决策行为的图形描述。对于任何一种博弈竞赛，我们都可以将其构建成一颗博弈树，其节点对应某一种局面，其分支表示进行一步决策，博弈树的根表示开始位置，叶子节点表示博弈到此结束。</p>
+<p><img src="/2021/03/10/%E4%BA%94%E5%AD%90%E6%A3%8BAI/v2-10ffcd50714f92016883fdfff851d10a_r.jpg" alt="v2-10ffcd50714f92016883fdfff851d10a_r"></p>
+<h3 id="极大极小值搜索算法"><a href="#极大极小值搜索算法" class="headerlink" title="极大极小值搜索算法"></a>极大极小值搜索算法</h3><p>我们需要对博弈树进行深度搜索，对此采用极大极小值搜索算法。</p>
+<p>假设在博弈树中，从根节点为0开始，奇数层表示电脑可能的走法，偶数层表示玩家可能的走法。我们规定对电脑越有利，分数越大，对玩家越有利，分数越小，分数的起点是0。</p>
+<p>电脑走棋的层我们称为 MAX层，这一层电脑要保证自己利益最大化，那么就需要选分最高的节点。</p>
+<p>玩家走棋的层我们称为MIN层，这一层玩家要保证自己的利益最大化，那么就会选分最低的节点。</p>
+<p><img src="/2021/03/10/%E4%BA%94%E5%AD%90%E6%A3%8BAI/v2-09b098668cdfd678a5d4e5ca2894f40a_b.png" alt="v2-09b098668cdfd678a5d4e5ca2894f40a_b"></p>
+<p>此图中甲是电脑，乙是玩家，那么在甲层的时候，总是选其中值最大的节点，乙层的时候，总是选其中最小的节点。</p>
+<p>也就是说在电脑落子前会遍历所有可走的位置，模拟玩家落子，预判多步以后的局面，找出最有利于自己的一步棋。</p>
+<p>伪代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">minimax</span><span class="params">(node, depth, maximizingPlayer)</span></span></span><br><span class="line"><span class="function">     <span class="keyword">if</span> depth </span>= <span class="number">0</span> <span class="keyword">or</span> node is a terminal node</span><br><span class="line">         <span class="keyword">return</span> the heuristic value of node</span><br><span class="line"> </span><br><span class="line">     <span class="keyword">if</span> maximizingPlayer</span><br><span class="line">         bestValue := ?∞</span><br><span class="line">         <span class="keyword">for</span> each child of node</span><br><span class="line">             v := minimax(child, depth ? <span class="number">1</span>, FALSE)</span><br><span class="line">             bestValue := max(bestValue, v)</span><br><span class="line">         <span class="keyword">return</span> bestValue</span><br><span class="line"> </span><br><span class="line">     <span class="keyword">else</span>    (* minimizing player *)</span><br><span class="line">         bestValue := +∞</span><br><span class="line">         <span class="keyword">for</span> each child of node</span><br><span class="line">             v := minimax(child, depth ? <span class="number">1</span>, TRUE)</span><br><span class="line">             bestValue := min(bestValue, v)</span><br><span class="line">         <span class="keyword">return</span> bestValue</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="评估函数"><a href="#评估函数" class="headerlink" title="评估函数"></a>评估函数</h3><p>每一种棋形的收益不同，这里建立一个评分表来对各种可能会出现的棋形做出评估，五子连珠时分值最大</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Dictionary</span>&lt;<span class="title">string</span>, <span class="title">int</span>&gt; scoreTable</span> = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">int</span>&gt;();</span><br><span class="line">	scoreTable.Add(<span class="string">&quot;aa___&quot;</span>, <span class="number">10</span>);                      <span class="comment">//眠二</span></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;a_a__&quot;</span>, <span class="number">10</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;___aa&quot;</span>, <span class="number">10</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;__a_a&quot;</span>, <span class="number">10</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;a__a_&quot;</span>, <span class="number">10</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_a__a&quot;</span>, <span class="number">10</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;a___a&quot;</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;__aa__&quot;</span>, <span class="number">600</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_aa__&quot;</span>, <span class="number">600</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;__aa_&quot;</span>, <span class="number">600</span>);                   <span class="comment">//活二 &quot;_aa___&quot;</span></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_a_a_&quot;</span>, <span class="number">500</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_a__a_&quot;</span>, <span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;a_a_a&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aa__a&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_aa_a&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;a_aa_&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_a_aa&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aa_a_&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aaa__&quot;</span>, <span class="number">1000</span>);                     <span class="comment">//眠三</span></span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_aa_a_&quot;</span>, <span class="number">5000</span>);                    <span class="comment">//跳活三</span></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_a_aa_&quot;</span>, <span class="number">5000</span>);</span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_aaa_&quot;</span>, <span class="number">9000</span>);                    <span class="comment">//活三</span></span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_aaaa&quot;</span>, <span class="number">15000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aaaa_&quot;</span>, <span class="number">15000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;a_aaa&quot;</span>, <span class="number">15000</span>);                    <span class="comment">//冲四</span></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aaa_a&quot;</span>, <span class="number">15000</span>);</span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aa_aa&quot;</span>, <span class="number">15000</span>);</span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;_aaaa_&quot;</span>, <span class="number">100000</span>);                 <span class="comment">//活四</span></span><br><span class="line"></span><br><span class="line">       scoreTable.Add(<span class="string">&quot;aaaaa&quot;</span>, <span class="built_in">int</span>.MaxValue);                </span><br></pre></td></tr></table></figure>
+<h3 id="Alpha-Beta剪枝算法"><a href="#Alpha-Beta剪枝算法" class="headerlink" title="Alpha-Beta剪枝算法"></a>Alpha-Beta剪枝算法</h3><p>如果要搜索所有节点无疑会花费大量的时间，Alpha-Beta剪枝算法用于搜索树时可以裁剪没有意义不需要搜索的分支，以提高运算速度。</p>
+<p>基本思想<br>借助极大极小搜索的特点，MAX节点对应A值，不会下降，MIN节点对应的B值不会上升。这里的A-B值分别指倒推时对应节点的值。</p>
+<p>对于MAX来说，其某个后继节点MIN的B值小于该MAX或者更早的先辈节点的A值时，停止对该MIN节点的搜索。同理，当某个MAX节点的A值大于等于其先辈MIN节点的B值时，停止对该节点的搜索。由此，我们可以得到，A-B必须要求搜索树某一部分达到最深计算出一部分MAX的A值或者MIN的B值，随着搜索，不断改进A-B值。</p>
+<ul>
+<li>剪枝规则总结</li>
+</ul>
+<ol>
+<li><p>   A剪枝：任何MIN的B小于任何他的父节点MAX的A时，停止该MIN以下的所有搜索，这个MIN的最终倒推值为当前的B值。（该B可能与真正的不同，但是没关系，不影响最终结果）</p>
+</li>
+<li><p>   B剪枝：任何MAX的A大于或者等与他的父节点MIN的B时，停止该MAX节点以下的所有搜索，这个MAX的最终倒推值为当前的A值。<br><img src="/2021/03/10/%E4%BA%94%E5%AD%90%E6%A3%8BAI/v2-34e744db9d47deca9846f3e978c9e35c_b.png" alt="v2-34e744db9d47deca9846f3e978c9e35c_b"></p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/10/%E4%BA%94%E5%AD%90%E6%A3%8BAI/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-剑指47-52" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -875,92 +976,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/02/23/Unity%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89-%E2%80%94%E2%80%94%E6%8C%81%E4%B9%85%E5%8C%96%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-剑指11-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/22/%E5%89%91%E6%8C%8711-15/">剑指11-15</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/22/%E5%89%91%E6%8C%8711-15/" class="archive-article-date">
-  	<time datetime="2021-02-22T11:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="11-二进制中1的个数"><a href="#11-二进制中1的个数" class="headerlink" title="11 二进制中1的个数"></a>11 二进制中1的个数</h3><p><strong>题目描述</strong></p>
-<p>输入一个整数，输出该数32位二进制表示中1的个数。其中负数用补码表示。</p>
-<p><strong>示例1</strong></p>
-<p>输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10</span><br></pre></td></tr></table></figure>
-<p>返回值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2021/02/22/%E5%89%91%E6%8C%8711-15/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/22/%E5%89%91%E6%8C%8711-15/">展开全文 >></a>
         </p>
       
 
