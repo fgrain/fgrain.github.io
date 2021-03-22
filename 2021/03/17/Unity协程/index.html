@@ -6,17 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Unity | fg的博客</title>
+  <title>Unity协程 | fg的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="心有所向，日复一日，必有精进">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fg的博客">
-<meta property="og:url" content="http://example.com/tags/Unity/index.html">
+  <meta name="description" content="本文参考：  https:&#x2F;&#x2F;blog.csdn.net&#x2F;huang9012&#x2F;article&#x2F;details&#x2F;38492937  https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_44079314&#x2F;article&#x2F;details&#x2F;84997940   协程是什么协程不是进程，也不是线程，它就是一个函数，一个特殊的函数——可以在某个地方挂起，并且可以重新在挂起处继续运行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity协程">
+<meta property="og:url" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/index.html">
 <meta property="og:site_name" content="fg的博客">
-<meta property="og:description" content="心有所向，日复一日，必有精进">
+<meta property="og:description" content="本文参考：  https:&#x2F;&#x2F;blog.csdn.net&#x2F;huang9012&#x2F;article&#x2F;details&#x2F;38492937  https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_44079314&#x2F;article&#x2F;details&#x2F;84997940   协程是什么协程不是进程，也不是线程，它就是一个函数，一个特殊的函数——可以在某个地方挂起，并且可以重新在挂起处继续运行。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322153957597.png">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322161328013.png">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/1.png">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/2.png">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/3.png">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322165718479.png">
+<meta property="og:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322165932697.png">
+<meta property="article:published_time" content="2021-03-16T16:10:42.000Z">
+<meta property="article:modified_time" content="2021-03-22T09:02:29.510Z">
 <meta property="article:author" content="fgrain">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="协程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322153957597.png">
   
     <link rel="alternative" href="/atom.xml" title="fg的博客" type="application/atom+xml">
   
@@ -141,36 +153,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Unity协程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-03-16T16:10:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/">Unity协程</a>
+    <h1 class="article-title" itemprop="name">
+      Unity协程
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2021-03-16T16:10:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文参考：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/huang9012/article/details/38492937">https://blog.csdn.net/huang9012/article/details/38492937</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44079314/article/details/84997940">https://blog.csdn.net/weixin_44079314/article/details/84997940</a></p>
+</li>
+</ul>
+<h2 id="协程是什么"><a href="#协程是什么" class="headerlink" title="协程是什么"></a>协程是什么</h2><p>协程不是进程，也不是线程，它就是一个函数，一个特殊的函数——可以在某个地方挂起，并且可以重新在挂起处继续运行。</p>
+<a id="more"></a>
+
+<p>协程方法与普通方法的区别：</p>
+<p>被调用时：普通方法被调用时，原来执行的部分保留现场，停止执行，然后去执行要调用的方法，并且，被调用的方法执行完之后才能返回到调用前的状态接着往下执行。协同方法的执行是不用等协同方法执行完再执行调用之前原来方法的代码。 而是两者异步执行。</p>
+<h2 id="协程的使用"><a href="#协程的使用" class="headerlink" title="协程的使用"></a>协程的使用</h2><p>Unity的协程系统是基于C#的一个简单而强大的接口 ，<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/system.collections.ienumerator.aspx">IEnumerator</a>，它允许你为自己的集合类型编写枚举器。在Unity中只要继承MonoBehaviour就可以使用协程</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">DelayCoroutine</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="comment">// work before delay</span></span><br><span class="line">	<span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params">&lt;time <span class="keyword">value</span> to delay&gt;</span>)</span>;</span><br><span class="line">	<span class="comment">// work after delay</span></span><br><span class="line">&#125;</span><br><span class="line">StartCoroutine(DelayCoroutine());</span><br></pre></td></tr></table></figure>
+<p>在IEnumerator类型的方法中写入需要执行的操作，遇到yield后会暂时挂起，等到yield return后的条件满足才继续执行yield语句后面的内容。</p>
+<p>通过StartCoroutine启动协程。StartCoroutine会判断yield返回的类型，如果他发现IEnumerator其实是一个WaitForSeconds类型的话，那么他就会进行特殊等待，一直等到WaitForSeconds延时结束了，才会结束挂起，而至于WWW或者WaitForFixedUpdate等类型，StartCoroutine也是同样的特殊处理</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>; <span class="comment">// 下一帧再执行后续代码</span></span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//下一帧再执行后续代码</span></span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">6</span>;<span class="comment">//(任意数字) 下一帧再执行后续代码</span></span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">break</span>; <span class="comment">//直接结束该协程的后续操作</span></span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> asyncOperation;<span class="comment">//等异步操作结束后再执行后续代码</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroution</span>(<span class="params"><span class="comment">/*某个协程*/</span></span>)</span>;<span class="comment">//等待某个协程执行完毕后再执行后续代码</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">WWW</span>(<span class="params"></span>)</span>;<span class="comment">//等待WWW操作完成后再执行后续代码</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;<span class="comment">//等待帧结束,等待直到所有的摄像机和GUI被渲染完成后，在该帧显示在屏幕之前执行</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">0.3f</span></span>)</span>;<span class="comment">//等待0.3秒，一段指定的时间延迟之后继续执行，在所有的Update函数完成调用的那一帧之后（这里的时间会受到Time.timeScale的影响）;</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSecondsRealtime</span>(<span class="params"><span class="number">0.3f</span></span>)</span>;<span class="comment">//等待0.3秒，一段指定的时间延迟之后继续执行，在所有的Update函数完成调用的那一帧之后（这里的时间不受到Time.timeScale的影响）;</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">WaitForFixedUpdate</span>(<span class="params"></span>)</span>;<span class="comment">//等待下一次FixedUpdate开始时再执行后续代码</span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitUntil</span>(<span class="params"></span>)<span class="comment">//将协同执行直到 当输入的参数（或者委托）为true的时候....如:yield return new WaitUntil(() =&gt; frame &gt;= 10);</span></span></span><br><span class="line"><span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitWhile</span>(<span class="params"></span>)<span class="comment">//将协同执行直到 当输入的参数（或者委托）为false的时候.... 如:yield return new WaitWhile(() =&gt; frame &lt; 10);</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="一些例子"><a href="#一些例子" class="headerlink" title="一些例子"></a>一些例子</h3><p>多次输出“Hello”，一帧输出一次</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       StartCoroutine(SayHelloFiveTimes());</span><br><span class="line">   &#125;  </span><br><span class="line"><span class="function">IEnumerator <span class="title">SayHello5Times</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">           <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>每一帧输出“Hello”，无限循环</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">SayHelloEveryFrame</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计时</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">CountSeconds</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="built_in">int</span> seconds = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">1f</span></span>)</span>;</span><br><span class="line">           seconds++;</span><br><span class="line">           Debug.Log(seconds + <span class="string">&quot; seconds have passed since the Coroutine started.&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322153957597.png" alt="image-20210322153957597"></p>
+<p>协程方法有个特点就是当协程挂起时，方法的状态被存储了，这使得方法中定义的这些变量都会保存它们的值，即使是在不同的帧中。</p>
+<h3 id="开始和终止协程"><a href="#开始和终止协程" class="headerlink" title="开始和终止协程"></a>开始和终止协程</h3><p>开始协程在上面的例子中用到了</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StartCoroutine(CountSeconds());</span><br></pre></td></tr></table></figure>
+<p>如果我们想要终止所有的协程，可以通过<a target="_blank" rel="noopener" href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.StopAllCoroutines.html">StopAllCoroutines()</a>方法来实现。</p>
+<p>如果想要终止特定的协程不能通过StopCoroutine(CountSeconds())来实现，我们要结束一个协程对象可以通过下面的方式</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Coroutine c;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       c = StartCoroutine(CountSeconds());        </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="keyword">if</span> (Input.GetKeyDown(KeyCode.J))</span><br><span class="line">       &#123;</span><br><span class="line">           StopCoroutine(c);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>或者在开始协程的时候将它的方法名作为字符串，这样结束时也可以通过字符串结束</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">StartCoroutine(<span class="string">&quot;CountSeconds&quot;</span>);</span><br><span class="line">StopCoroutine(<span class="string">&quot;CountSeconds&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="协程的参数"><a href="#协程的参数" class="headerlink" title="协程的参数"></a>协程的参数</h3><p>协程作为方法可以传递参数，当协程有参数的时候不能用字符串启动。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="comment">//输出5次Hello，间隔1秒</span></span><br><span class="line">       c = StartCoroutine(RepeatMessage(<span class="number">5</span>, <span class="number">1</span>, <span class="string">&quot;Hello&quot;</span>));</span><br><span class="line">   &#125;</span><br><span class="line"><span class="function">IEnumerator <span class="title">RepeatMessage</span>(<span class="params"><span class="built_in">int</span> count, <span class="built_in">float</span> frequency, <span class="built_in">string</span> message</span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(message);</span><br><span class="line">           <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params">frequency</span>)</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="嵌套的协程"><a href="#嵌套的协程" class="headerlink" title="嵌套的协程"></a>嵌套的协程</h3><p>协程最强大的一个功能就是它们可以通过使用yield语句来相互嵌套。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">SaySomeThings</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       Debug.Log(<span class="string">&quot;The routine has started&quot;</span>);</span><br><span class="line">       <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">RepeatMessage(<span class="number">1</span>, <span class="number">1f</span>, <span class="string">&quot;Hello&quot;</span></span>))</span>;</span><br><span class="line">       Debug.Log(<span class="string">&quot;1 second has passed since the last message&quot;</span>);</span><br><span class="line">       <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">RepeatMessage(<span class="number">1</span>, <span class="number">2.5f</span>, <span class="string">&quot;Hello&quot;</span></span>))</span>;</span><br><span class="line">       Debug.Log(<span class="string">&quot;2.5 seconds have passed since the last message&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322161328013.png" alt="image-20210322161328013"></p>
+<h3 id="控制对象行为的例子"><a href="#控制对象行为的例子" class="headerlink" title="控制对象行为的例子"></a>控制对象行为的例子</h3><ul>
+<li><strong>运动到某一位置</strong></li>
+</ul>
+<p>在Inspector面板中设置目标位置和运动速度，在游戏开始时将一个物体移动到目标位置</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> Vector3 targetPosition;</span><br><span class="line">   <span class="keyword">public</span> <span class="built_in">float</span> moveSpeed=<span class="number">5</span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       c = StartCoroutine(MoveToPosition(targetPosition));</span><br><span class="line">   &#125;</span><br><span class="line"><span class="function">IEnumerator <span class="title">MoveToPosition</span>(<span class="params">Vector3 target</span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="keyword">while</span> (transform.position != target)</span><br><span class="line">       &#123;</span><br><span class="line">           transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed*Time.deltaTime);</span><br><span class="line">           <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>按指定路径前进</strong></li>
+</ul>
+<p>我们可以让运动到某一位置的程序做更多，不仅仅是一个指定位置，我们还可以通过数组来给它赋值更多的位置，通过MoveToPosition() ，我们可以让它在这些点之间持续运动。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Vector3&gt; path;    </span><br><span class="line"><span class="function">IEnumerator <span class="title">MoveOnPath</span>(<span class="params"><span class="built_in">bool</span> loop</span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="keyword">do</span></span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">foreach</span> (<span class="keyword">var</span> point <span class="keyword">in</span> path)</span><br><span class="line">               <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">MoveToPosition(point</span>))</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">while</span> (loop);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="协程的执行顺序"><a href="#协程的执行顺序" class="headerlink" title="协程的执行顺序"></a>协程的执行顺序</h2><h3 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h3><p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/1.png" alt="1"></p>
+<p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/2.png" alt="2"></p>
+<p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/3.png" alt="3"></p>
+<h3 id="return-null的协程"><a href="#return-null的协程" class="headerlink" title="return null的协程"></a>return null的协程</h3><p>可以看到，在GameLogic部分对协程中挂起的条件进行了判断。<br>也就是说，协程顺序为：<br>（当前帧为第1帧）<br>第1帧在start中开启协程，执行协程（自上而下），遇到yield return null 将后面的内容挂 起。<br>这时继续执行第1帧剩下的东西直到第1帧Update执行结束，这时对挂起的协程进行判断 是否满足return条件，<br>满足则在第2帧Update之后，在LateUpdate前执行协程中yield return 以后的代码；<br>不满足条件则继续执行第1帧的LateUpdate。<br>第2帧同第1帧相同。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CorTest2</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> i = <span class="number">0</span>;<span class="comment">//update中判断次数的变量</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;start 1&quot;</span>);</span><br><span class="line">        <span class="comment">//开启协程1</span></span><br><span class="line">        StartCoroutine(Test());</span><br><span class="line">        Debug.Log(<span class="string">&quot;start 2&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;第&quot;</span> + ++i + <span class="string">&quot;帧开始&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">LateUpdate</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;第&quot;</span> + i + <span class="string">&quot;帧结束&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">IEnumerator <span class="title">Test</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(<span class="string">&quot;协程1第一次&quot;</span>);</span><br><span class="line">            <span class="comment">//挂起时机</span></span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            Debug.Log(<span class="string">&quot;协程1第二次&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322165718479.png" alt="image-20210322165718479"></p>
+<p>可以看到，协程运行到一半在第一帧被挂起，第二帧Update执行完后满足条件继续执行。</p>
+<h3 id="yield-return-StartCoroutine"><a href="#yield-return-StartCoroutine" class="headerlink" title="yield return StartCoroutine()"></a>yield return StartCoroutine()</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">Test</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(<span class="string">&quot;协程1第一次&quot;</span>);</span><br><span class="line">           <span class="comment">//挂起时机</span></span><br><span class="line">           <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">Test2(</span>))</span>;</span><br><span class="line">           Debug.Log(<span class="string">&quot;协程1第二次&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function">IEnumerator <span class="title">Test2</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">       Debug.Log(<span class="string">&quot;协程2第一次&quot;</span>);</span><br><span class="line">       <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">       Debug.Log(<span class="string">&quot;协程2第二次&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/image-20210322165932697.png" alt="image-20210322165932697"></p>
+<p>原理都是一样的，执行完yield return 后挂起（注意不是遇到就挂起，而是执行），在每一帧的update与lateupdate之间对挂起的内容进行判断，满足则继续执行被挂起的协程的剩余部分。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,217 +253,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/17/Unity%E5%8D%8F%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" class="archive-article-date">
-  	<time datetime="2021-03-16T13:36:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/03/20/%E5%89%91%E6%8C%8758-67/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          剑指58-67
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">事件数据-EventData</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/">事件数据-EventData</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">UnityEvent</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
-  	<time datetime="2021-03-14T15:27:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/">UnityEvent和事件系统</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">UnityEvent</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-03-05T12:32:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/">Unity中的运动（二）——物理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/23/Unity%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89-%E2%80%94%E2%80%94%E6%8C%81%E4%B9%85%E5%8C%96%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2021-02-23T08:11:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/23/Unity%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89-%E2%80%94%E2%80%94%E6%8C%81%E4%B9%85%E5%8C%96%E5%AF%B9%E8%B1%A1/">Unity对象管理（一） ——持久化对象</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/" class="archive-article-date">
-  	<time datetime="2021-02-19T06:35:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/">Unity中的运动（一）——滑动小球</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -419,9 +384,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
