@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>事件数据-EventData | fgrain的博客</title><meta name="keywords" content="Unity,UnityEvent"><meta name="author" content="fgrain"><meta name="copyright" content="fgrain"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="BaseEventData：基础事件数据——事件数据的基类，和EventSystem配合使用 PointerEventData：指针事件数据——鼠标与触摸事件的相关数据（点击、抬起、拖动等），UGUI中大部分事件数据类型都是PointerEventData类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件数据-EventData">
+<meta property="og:url" content="http://example.com/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/index.html">
+<meta property="og:site_name" content="fgrain的博客">
+<meta property="og:description" content="BaseEventData：基础事件数据——事件数据的基类，和EventSystem配合使用 PointerEventData：指针事件数据——鼠标与触摸事件的相关数据（点击、抬起、拖动等），UGUI中大部分事件数据类型都是PointerEventData类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/archive.jpg">
+<meta property="article:published_time" content="2021-03-16T13:36:54.000Z">
+<meta property="article:modified_time" content="2022-01-12T01:13:34.433Z">
+<meta property="article:author" content="fgrain">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="UnityEvent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/archive.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '事件数据-EventData',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-01-12 09:13:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/archive.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">fgrain的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">事件数据-EventData</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-16T13:36:54.000Z" title="发表于 2021-03-16 21:36:54">2021-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-12T01:13:34.433Z" title="更新于 2022-01-12 09:13:34">2022-01-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="事件数据-EventData"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>BaseEventData</strong>：基础事件数据——事件数据的基类，和EventSystem配合使用</p>
+<p><strong>PointerEventData</strong>：指针事件数据——鼠标与触摸事件的相关数据（点击、抬起、拖动等），UGUI中大部分事件数据类型都是PointerEventData类型</p>
+<span id="more"></span>
+
+<ul>
+<li>button：该属性有3个取值。分别是Left（鼠标左键）、Right（鼠标右键）、Middle（鼠标中键）</li>
+<li>clickCount：连续点击的次数</li>
+<li>clickTime：发送点击事件的时间</li>
+<li>delta：当前帧与上一帧的位置差值</li>
+<li>dragging：是否为拖拽状态</li>
+<li>position：指针当前位置</li>
+<li>pressPosition：指针按下时的位置</li>
+<li>scrollDelta：当前帧与上一帧的滚动量差值</li>
+<li>useDragThreshold：是否使用拖动阈值（DragThreshold）</li>
+<li>worldNormal：射线检测到的第一个物体的法线</li>
+<li>worldPosition：射线检测到的第一个物体的世界坐标</li>
+<li>lastPress：最后按下的游戏物体</li>
+<li>pointerDrag：拖拽的游戏物体</li>
+<li>pointerEnter：指针进入的游戏物体</li>
+<li>pointerPress：指针按下时的游戏物体</li>
+<li>rawPointerPress：不管处理不处理按下事件，都会保存指针按下时的游戏物体</li>
+<li>pointerId：指针ID（TouchID，鼠标按键ID）</li>
+<li>pointerCurrentRaycast：指针当前的检测射线</li>
+<li>pointerPressRaycast：指针按下时的检测射线</li>
+<li>enterEventCamera：指针进入时的事件相机</li>
+<li>pressEventCamera：指针按下时的事件相机</li>
+</ul>
+<p><strong>AxisEventData</strong>：轴向事件数据——手柄和键盘中控制轴向相关的事件数据（参考InputManager设置）</p>
+<ul>
+<li>moveVector：原始的输入向量值。即键盘和手柄输入的轴向值（参考InputManager设置）</li>
+</ul>
+<p>各分量取值为-1、0、1三个，没有小数部分（因为使用的是Input.GetAxisRaw()函数）</p>
+<p>参考StandaloneInputModule.GetRawMoveVector函数的实现和调用位置</p>
+<ul>
+<li>moveDir：移动的方向。公有五个值：Left、Up、Right、Down、None</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">fgrain</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/">http://example.com/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">fgrain的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/UnityEvent/">UnityEvent</a></div><div class="post_share"><div class="social-share" data-image="/img/archive.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/20/%E5%89%91%E6%8C%8758-67/"><img class="prev-cover" src="/img/archive.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">剑指58-67</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/"><img class="next-cover" src="/img/archive.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UnityEvent和事件系统</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="UnityEvent和事件系统"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-14</div><div class="title">UnityEvent和事件系统</div></div></a></div><div><a href="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/" title="Unity中的运动（一）——滑动小球"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-19</div><div class="title">Unity中的运动（一）——滑动小球</div></div></a></div><div><a href="/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/" title="Unity中的运动（二）——物理"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-05</div><div class="title">Unity中的运动（二）——物理</div></div></a></div><div><a href="/2021/03/22/Unity%E5%8D%8F%E7%A8%8B/" title="Unity协程"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-22</div><div class="title">Unity协程</div></div></a></div><div><a href="/2021/02/23/Unity%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89-%E2%80%94%E2%80%94%E6%8C%81%E4%B9%85%E5%8C%96%E5%AF%B9%E8%B1%A1/" title="Unity对象管理（一） ——持久化对象"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-23</div><div class="title">Unity对象管理（一） ——持久化对象</div></div></a></div><div><a href="/2021/05/30/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" title="有限状态机"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">有限状态机</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">fgrain</div><div class="author-info__description">太阳照常升起</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fgrain"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fgrain" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/30/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" title="有限状态机"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="有限状态机"/></a><div class="content"><a class="title" href="/2021/05/30/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" title="有限状态机">有限状态机</a><time datetime="2021-05-30T11:03:25.000Z" title="发表于 2021-05-30 19:03:25">2021-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/22/Unity%E5%8D%8F%E7%A8%8B/" title="Unity协程"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity协程"/></a><div class="content"><a class="title" href="/2021/03/22/Unity%E5%8D%8F%E7%A8%8B/" title="Unity协程">Unity协程</a><time datetime="2021-03-22T07:10:42.000Z" title="发表于 2021-03-22 15:10:42">2021-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/20/%E5%89%91%E6%8C%8758-67/" title="剑指58-67"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="剑指58-67"/></a><div class="content"><a class="title" href="/2021/03/20/%E5%89%91%E6%8C%8758-67/" title="剑指58-67">剑指58-67</a><time datetime="2021-03-20T11:07:23.000Z" title="发表于 2021-03-20 19:07:23">2021-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" title="事件数据-EventData"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="事件数据-EventData"/></a><div class="content"><a class="title" href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" title="事件数据-EventData">事件数据-EventData</a><time datetime="2021-03-16T13:36:54.000Z" title="发表于 2021-03-16 21:36:54">2021-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="UnityEvent和事件系统"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityEvent和事件系统"/></a><div class="content"><a class="title" href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="UnityEvent和事件系统">UnityEvent和事件系统</a><time datetime="2021-03-14T15:27:29.000Z" title="发表于 2021-03-14 23:27:29">2021-03-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/archive.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By fgrain</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">学习和分享</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

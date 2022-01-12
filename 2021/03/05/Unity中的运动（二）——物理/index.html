@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unity中的运动（二）——物理 | fgrain的博客</title><meta name="keywords" content="Unity"><meta name="author" content="fgrain"><meta name="copyright" content="fgrain"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文内容  控制刚体小球的速度 通过跳跃支持垂直运动 检查地面及其角度 使用ProBuilder创建测试场景 沿着斜坡移动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity中的运动（二）——物理">
+<meta property="og:url" content="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/index.html">
+<meta property="og:site_name" content="fgrain的博客">
+<meta property="og:description" content="本文内容  控制刚体小球的速度 通过跳跃支持垂直运动 检查地面及其角度 使用ProBuilder创建测试场景 沿着斜坡移动">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/archive.jpg">
+<meta property="article:published_time" content="2021-03-05T12:32:14.000Z">
+<meta property="article:modified_time" content="2022-01-12T01:13:34.415Z">
+<meta property="article:author" content="fgrain">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/archive.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Unity中的运动（二）——物理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-12 09:13:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/archive.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">fgrain的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Unity中的运动（二）——物理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-05T12:32:14.000Z" title="发表于 2021-03-05 20:32:14">2021-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-12T01:13:34.415Z" title="更新于 2022-01-12 09:13:34">2022-01-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Unity中的运动（二）——物理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>本文内容</strong></p>
+<ul>
+<li>控制刚体小球的速度</li>
+<li>通过跳跃支持垂直运动</li>
+<li>检查地面及其角度</li>
+<li>使用ProBuilder创建测试场景</li>
+<li>沿着斜坡移动</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-刚体"><a href="#1-刚体" class="headerlink" title="1.刚体"></a>1.刚体</h2><p>为了使球体在复杂的3D环境中移动，我们必须支持与任意几何图形的交互。我们将使用Unity现有的物理引擎，而不是自己实现。</p>
+<p>与物理引擎结合可以使用两种通用方法来控制角色。首先是刚体方法，即通过施加力或改变其速度，使角色的行为像常规物理对象一样，而间接控制它。第二种是运动学方法，即在仅查询物理引擎以执行自定义碰撞检测的同时进行直接控制。</p>
+<h3 id="1-1刚体组件"><a href="#1-1刚体组件" class="headerlink" title="1.1刚体组件"></a>1.1刚体组件</h3><p>用第一种方式控制球体首先要向其添加一个刚体组件。可以使用刚体的默认配置。</p>
+<p>添加刚体之后在代码中去掉位置约束，移动小球，小球可以经过平面边缘，但会掉下去</p>
+<p><img src="/.com//image-20210305211826449.png" alt="image-20210305211826449"></p>
+<p>为防止小球掉下去我们可以围绕着平面造一堵墙，当小球视图移动到一个角落时，由于物理引擎和代码为定位球产生冲突，球会变得抖动。我们将其移入墙壁，PhysX会将其后推来解决碰撞，如果停止推动PhysX将使球体因为动量保持运动。</p>
+<p><img src="/.com//image-20210305214133898.png" alt="image-20210305214133898"></p>
+<h3 id="1-2控制刚体速率"><a href="#1-2控制刚体速率" class="headerlink" title="1.2控制刚体速率"></a>1.2控制刚体速率</h3><p>直接调整球的位置可以有效的使球移动，但有些情况我们需要对球施加力或调整球的速度来间接控制球。</p>
+<p>我们需要访问球体的刚体组件， 可以在Awake中初始化字段。然后给刚体设置速度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private Rigidbody body;</span><br><span class="line">   private void Awake()</span><br><span class="line">   &#123;</span><br><span class="line">       body = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>小球碰撞到墙时会影响速度，所以我们要先获取小球的速度，再对小球的速度进行调整</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">velocity = body.velocity;</span><br><span class="line"></span><br><span class="line">     Vector3 desiredSpeed = new Vector3(playerInput.x, 0, playerInput.y) * maxSpeed;</span><br><span class="line">     float maxSpeedChange = maxAcceleration * Time.deltaTime;</span><br><span class="line"></span><br><span class="line">     velocity.x = Mathf.MoveTowards(velocity.x, desiredSpeed.x, maxSpeedChange);</span><br><span class="line">     velocity.z = Mathf.MoveTowards(velocity.z, desiredSpeed.z, maxSpeedChange);</span><br><span class="line"></span><br><span class="line">     body.velocity = velocity;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3无摩擦运动"><a href="#1-3无摩擦运动" class="headerlink" title="1.3无摩擦运动"></a>1.3无摩擦运动</h3><p>通过调整球体的速度，我们让小球看上去像之前仅调整位移的运动，但速度慢了许多，这是因为PhysX会产生摩擦，虽然这更真实，但会使配置球体变得困难。我们可以创建一个新的物理材质取消摩擦和反弹，把所有值设为0，并将“combine”设为Minimum。</p>
+<p><img src="/.com//image-20210306143701902.png" alt="image-20210306143701902"></p>
+<p>然后把材质分配给球体的碰撞器（collider）</p>
+<p><img src="/.com//image-20210306143732725.png" alt="image-20210306143732725"></p>
+<p>现在小球不受摩擦和碰撞，运动丝滑了许多。</p>
+<p>但球体在碰撞的时候仍会反弹一点，这是因为PhysX不会防止碰撞，而是会在碰撞发生后检测它们，然后移动刚体以使它们不再相交。如果运动特别块墙体有很薄，会发生小球穿墙而过的情况。可以通过更改“Rigidbody”的“Collision Detcetion”模式来防止这种情况，仅在运动非常快的时候这样设置。</p>
+<p>若我们想让小球滑动而不是滚动，通过“Rigidbody”组件的“Constraints ”冻结旋转来实现</p>
+<p><img src="/.com//image-20210306145009927.png" alt="image-20210306145009927"></p>
+<h3 id="1-4-Fixed-Update"><a href="#1-4-Fixed-Update" class="headerlink" title="1.4 Fixed Update"></a>1.4 Fixed Update</h3><p>物理引擎使用固定的时间步长，而不管帧速率如何。Upadta为每一帧调用但每一帧的时间不固定，而FixedUpdate则不受帧率影响，它使以固定时间间隔（0.02s）被调用。所以一些物理熟悉的更新操作应放在FixedUpdate中进行操作，这样物体的物理表现更加平滑。</p>
+<p>我们将检查输入并设置速度的部分放在Update中，调整速度的部分放在FixedUpdate中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   void Update()</span><br><span class="line">   &#123;</span><br><span class="line">       playerInput.x = Input.GetAxis(&quot;Horizontal&quot;);</span><br><span class="line">       playerInput.y = Input.GetAxis(&quot;Vertical&quot;);</span><br><span class="line">       playerInput = Vector2.ClampMagnitude(playerInput, 1f);</span><br><span class="line">       desiredSpeed = new Vector3(playerInput.x, 0, playerInput.y) * maxSpeed;</span><br><span class="line">   &#125;</span><br><span class="line">private void FixedUpdate()</span><br><span class="line">   &#123;</span><br><span class="line">       velocity = body.velocity;     </span><br><span class="line">       float maxSpeedChange = maxAcceleration * Time.deltaTime;</span><br><span class="line">       velocity.x = Mathf.MoveTowards(velocity.x, desiredSpeed.x, maxSpeedChange);</span><br><span class="line">       velocity.z = Mathf.MoveTowards(velocity.z, desiredSpeed.z, maxSpeedChange);</span><br><span class="line">       body.velocity = velocity;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>根据你的帧速率，FixedUpdate每次调用时候，Update可以被调用零次，一次或多次。每个帧都会发生一系列FixedUpdate调用，然后调用Update，然后渲染该帧。当物理时间步长相对于帧时间太大时，这会使物理仿真的离散性质变得明显。可以通过减少固定时间步长或启用刚体的插值模式来解决此问题。</p>
+<p><em>Interpolate</em> 插值，如果发现刚体移动有卡顿，可以尝试选择此选项。 </p>
+<ul>
+<li><em>None</em> 不使用插值</li>
+<li><em>Interpolate</em> 根据上一帧的Transform进行平滑</li>
+<li><em>Extrapolate</em> 根据估算的下一帧的Transform进行平滑</li>
+</ul>
+</blockquote>
+<h2 id="2-跳跃"><a href="#2-跳跃" class="headerlink" title="2.跳跃"></a>2.跳跃</h2><h3 id="2-1跳跃指令"><a href="#2-1跳跃指令" class="headerlink" title="2.1跳跃指令"></a>2.1跳跃指令</h3><p>使用Input.GetButtonDown(“Jump”)来检测玩家是否在该帧按下跳跃按钮。默认空格为跳跃键，可以在Editor-&gt;ProjectSetting-&gt;InputManager中更改按键。我们在Update中执行这个操作，用desiredJump字段跟踪是否需要跳跃，在FixedUpdate中执行跳跃操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private bool desiredJump;</span><br><span class="line">......</span><br><span class="line">void Update()</span><br><span class="line">   &#123;</span><br><span class="line">       ......</span><br><span class="line">       desiredJump = Input.GetButtonDown(&quot;Jump&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但我们可能不在下一帧调用FixedUpdate，这种情况下desiredJump被设为false，跳转指令将被遗忘。我们可以通过或运算防止这种情况，直到我们显示的将其设置回false</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desiredJump |= Input.GetButtonDown(&quot;Jump&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>在调整速度后并且在fixedUpdate调用之前检测是否跳跃，若有跳跃请求，调用Jump方法，该方法初始化为在速度y的分量上加5，模拟突然向上的加速度。</p>
+<p><img src="/.com//image-20210307211148536.png" alt="image-20210307211148536"></p>
+<h3 id="2-2跳跃高度"><a href="#2-2跳跃高度" class="headerlink" title="2.2跳跃高度"></a>2.2跳跃高度</h3><p>我们将跳跃的高度设为可配置的。可以通过直接控制跳跃速度来实现这一点，但这并不直观。直接控制跳跃高度更方便。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SerializeField, Range(0f, 10f)] float jumpHeight = 2f; </span><br></pre></td></tr></table></figure>
+
+<p>跳跃需克服重力，具体来说<br>$$<br>v_y=\sqrt{-2gh}<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">velocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);</span><br></pre></td></tr></table></figure>
+
+<p>由于物理模拟是离散性的，我们很可能无法达到所需的高度。在时间步长之间的某个中间值时达到最大值。</p>
+<h3 id="2-3-在地面上跳跃"><a href="#2-3-在地面上跳跃" class="headerlink" title="2.3 在地面上跳跃"></a>2.3 在地面上跳跃</h3><p>现在球可以在空中起跳，但通常来说球只能从地面起跳。我们不能直接询问刚体是否正在接触地面，但当它与物体相撞时我们可以得到通知。如果脚本有一个onCollisionEnter方法，那么PhysX检测到一个新的碰撞后就会调用它。在此之后将调用onCollisionExit方法，将onGround设为false。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private bool onGround;</span><br><span class="line">private void OnCollisionEnter(Collision collision)</span><br><span class="line">   &#123;</span><br><span class="line">       onGround = true;</span><br><span class="line">   &#125;</span><br><span class="line">   private void OnCollisionExit(Collision collision)</span><br><span class="line">   &#123;</span><br><span class="line">       onGround = false;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我们只能在地面上跳跃，如果我们没有接触到任何物体，将忽略跳跃指令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (onGround) </span><br><span class="line">           velocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);</span><br></pre></td></tr></table></figure>
+
+<p>当球体只接触地面时跳跃指令会起作用，但如果球体短暂的接触了墙壁然后分开，跳跃指令就失效了，因为在和墙壁分开时调用了OnCollisionExit方法，onGround被设为false。解决方法是通过OnCollisionStay更新状态，只要保持碰撞就会调用该方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private void OnCollisionStay(Collision collision)</span><br><span class="line">&#123;</span><br><span class="line">    onGround = true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每一个物理步骤开始时都会先调用FixedUpdate方法，最后调用collision方法。所以当FixedUpdate方法被调用时，如果有碰撞发生，onGround将在最后一步被设为true，如果要保证onGround有效，应当在FixedUpdate结束时将其设置回false。</p>
+<h3 id="2-4-不应该有墙跳跃"><a href="#2-4-不应该有墙跳跃" class="headerlink" title="2.4 不应该有墙跳跃"></a>2.4 不应该有墙跳跃</h3><p>现在接触任何物体都可以跳跃，在半空中接触墙也可以接着跳，我们需要区分墙壁和地面。将地面定义为主要水平面，可以通过检测接触点的法线向量来检查我们所碰撞的对象是否满足条件。</p>
+<p>涉及到网格碰撞器时一次碰撞可能有多个接触组成，但在平面球体碰撞中只有一个接触点，我们在Oncollision中传递一个碰撞参数，用EvaluateCollision方法处理碰撞信息。</p>
+<p>通过collision中的contactCount属性找到接触点的数量，通过GetContact方法遍历所有点，然后获得法线的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private void EvaluateCollision(Collision collision)</span><br><span class="line">&#123;</span><br><span class="line">    for(int i = 0; i &lt; collision.contactCount; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Vector3 normal = collision.GetContact(i).normal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从地面起跳时法线指向正上方，即y分量为1，因从当y分量为1时小球在地面上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 normal = collision.GetContact(i).normal;</span><br><span class="line">         onGround |= normal.y == 1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-空中起跳"><a href="#2-5-空中起跳" class="headerlink" title="2.5 空中起跳"></a>2.5 空中起跳</h3><p>有些情况下游戏会支持多段跳，我们可以设置最多允许多少次空中起跳。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[SerializeField, Range(0f, 5f)] float maxAirJumps = 2;</span><br><span class="line">private float jumpPhase = 0;</span><br></pre></td></tr></table></figure>
+
+<p>现在在FixedUpdate中检查小球状态，若小球在地面jumpPhase = 0，在达到最大跳跃次数前都可以起跳，将状态更新的语句单独放在一个方法中方面后续更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private void UpdateState()</span><br><span class="line">   &#123;</span><br><span class="line">       velocity = body.velocity;</span><br><span class="line">       if (onGround) jumpPhase = 0;</span><br><span class="line">   &#125;</span><br><span class="line">   private void Jump()</span><br><span class="line">   &#123;</span><br><span class="line">       if (onGround || jumpPhase &lt; maxAirJumps)</span><br><span class="line">       &#123;</span><br><span class="line">           jumpPhase++;</span><br><span class="line">           velocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">fgrain</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/">http://example.com/2021/03/05/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E7%89%A9%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">fgrain的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a></div><div class="post_share"><div class="social-share" data-image="/img/archive.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/06/%E5%89%91%E6%8C%8736-41/"><img class="prev-cover" src="/img/archive.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">剑指36-41</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/05/%E5%89%91%E6%8C%8731-35/"><img class="next-cover" src="/img/archive.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">剑指31-35</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="UnityEvent和事件系统"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-14</div><div class="title">UnityEvent和事件系统</div></div></a></div><div><a href="/2021/02/19/Unity%E4%B8%AD%E7%9A%84%E8%BF%90%E5%8A%A8/" title="Unity中的运动（一）——滑动小球"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-19</div><div class="title">Unity中的运动（一）——滑动小球</div></div></a></div><div><a href="/2021/03/22/Unity%E5%8D%8F%E7%A8%8B/" title="Unity协程"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-22</div><div class="title">Unity协程</div></div></a></div><div><a href="/2021/02/23/Unity%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89-%E2%80%94%E2%80%94%E6%8C%81%E4%B9%85%E5%8C%96%E5%AF%B9%E8%B1%A1/" title="Unity对象管理（一） ——持久化对象"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-23</div><div class="title">Unity对象管理（一） ——持久化对象</div></div></a></div><div><a href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" title="事件数据-EventData"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-16</div><div class="title">事件数据-EventData</div></div></a></div><div><a href="/2021/05/30/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" title="有限状态机"><img class="cover" src="/img/archive.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">有限状态机</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">fgrain</div><div class="author-info__description">太阳照常升起</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fgrain"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fgrain" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9A%E4%BD%93"><span class="toc-number">1.</span> <span class="toc-text">1.刚体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E5%88%9A%E4%BD%93%E7%BB%84%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1.1刚体组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E6%8E%A7%E5%88%B6%E5%88%9A%E4%BD%93%E9%80%9F%E7%8E%87"><span class="toc-number">1.2.</span> <span class="toc-text">1.2控制刚体速率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E6%97%A0%E6%91%A9%E6%93%A6%E8%BF%90%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">1.3无摩擦运动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Fixed-Update"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 Fixed Update</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B7%B3%E8%B7%83"><span class="toc-number">2.</span> <span class="toc-text">2.跳跃</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E8%B7%B3%E8%B7%83%E6%8C%87%E4%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">2.1跳跃指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E8%B7%B3%E8%B7%83%E9%AB%98%E5%BA%A6"><span class="toc-number">2.2.</span> <span class="toc-text">2.2跳跃高度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%9C%A8%E5%9C%B0%E9%9D%A2%E4%B8%8A%E8%B7%B3%E8%B7%83"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 在地面上跳跃</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E4%B8%8D%E5%BA%94%E8%AF%A5%E6%9C%89%E5%A2%99%E8%B7%B3%E8%B7%83"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 不应该有墙跳跃</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E7%A9%BA%E4%B8%AD%E8%B5%B7%E8%B7%B3"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 空中起跳</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/30/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" title="有限状态机"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="有限状态机"/></a><div class="content"><a class="title" href="/2021/05/30/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" title="有限状态机">有限状态机</a><time datetime="2021-05-30T11:03:25.000Z" title="发表于 2021-05-30 19:03:25">2021-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/22/Unity%E5%8D%8F%E7%A8%8B/" title="Unity协程"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity协程"/></a><div class="content"><a class="title" href="/2021/03/22/Unity%E5%8D%8F%E7%A8%8B/" title="Unity协程">Unity协程</a><time datetime="2021-03-22T07:10:42.000Z" title="发表于 2021-03-22 15:10:42">2021-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/20/%E5%89%91%E6%8C%8758-67/" title="剑指58-67"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="剑指58-67"/></a><div class="content"><a class="title" href="/2021/03/20/%E5%89%91%E6%8C%8758-67/" title="剑指58-67">剑指58-67</a><time datetime="2021-03-20T11:07:23.000Z" title="发表于 2021-03-20 19:07:23">2021-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" title="事件数据-EventData"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="事件数据-EventData"/></a><div class="content"><a class="title" href="/2021/03/16/%E4%BA%8B%E4%BB%B6%E6%95%B0%E6%8D%AE-EventData/" title="事件数据-EventData">事件数据-EventData</a><time datetime="2021-03-16T13:36:54.000Z" title="发表于 2021-03-16 21:36:54">2021-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="UnityEvent和事件系统"><img src="/img/archive.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityEvent和事件系统"/></a><div class="content"><a class="title" href="/2021/03/14/UnityEvent%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="UnityEvent和事件系统">UnityEvent和事件系统</a><time datetime="2021-03-14T15:27:29.000Z" title="发表于 2021-03-14 23:27:29">2021-03-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/archive.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By fgrain</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">学习和分享</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
